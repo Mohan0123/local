@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LocalZone - Local Business Directory</title>
+  <meta name="description" content="Discover verified local businesses, healthcare clinics, stores, and services across Dhar and Indore on LocalZone." />
+  <meta property="og:title" content="LocalZone - Local Business Directory" />
+  <meta property="og:description" content="Discover verified local businesses, healthcare clinics, stores, and services across Dhar and Indore on LocalZone." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#16a34a',
+              600: '#15803d',
+              700: '#166534',
+              800: '#14532d',
+              900: '#052e16',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    
+    /* Smooth custom scrollbars */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+    .dark ::-webkit-scrollbar-thumb { background: #475569; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+  <!-- ================= TOP NAVIGATION BAR ================= -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      
+      <!-- Brand Wordmark -->
+      <a href="#" onclick="backToDirectoryHome(event)" class="flex items-center gap-2.5 shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 rounded-lg group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-700 to-emerald-500 text-white flex items-center justify-center font-black text-lg shadow-sm group-hover:scale-105 transition-transform">
+          L
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight text-slate-900 dark:text-white block leading-tight">LocalZone</span>
+          <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">Dhar & Indore Region</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#cities-section" onclick="navigateToSection('cities-section')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors whitespace-nowrap">Explore Cities</a>
+        <a href="#categories-section" onclick="navigateToSection('categories-section')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors whitespace-nowrap">All Categories</a>
+        <a href="#listings-section" onclick="navigateToSection('listings-section')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors whitespace-nowrap">Directory Listings</a>
+        <button onclick="toggleFavoritesFilter()" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors whitespace-nowrap flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-rose-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span>Saved</span>
+        </button>
+      </nav>
+
+      <!-- Action Zone -->
+      <div class="flex items-center gap-2 shrink-0">
+        <!-- Dark Mode Toggle -->
+        <button id="theme-toggle-btn" onclick="toggleDarkMode()" aria-label="Toggle dark mode" class="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <svg id="moon-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+          <svg id="sun-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        </button>
+
+        <!-- Saved / Favorites Button -->
+        <button onclick="toggleFavoritesFilter()" id="favorites-toggle-btn" class="p-2 text-slate-500 hover:text-rose-500 dark:text-slate-400 dark:hover:text-rose-400 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Saved Businesses">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </button>
+
+        <!-- Subtle Refresh Button -->
+        <button onclick="refreshDirectory(true)" id="header-refresh-btn" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 rounded-lg transition-colors whitespace-nowrap" title="Refresh directory listings">
+          <svg id="refresh-spinner-icon" class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          <span id="refresh-btn-text">Refresh</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN DIRECTORY HOME VIEW ================= -->
+  <main id="directory-home-view" class="flex-1 flex flex-col">
+
+    <!-- HERO SECTION & SEARCH -->
+    <section class="relative bg-gradient-to-b from-white via-slate-50 to-slate-100/70 dark:from-slate-900 dark:via-slate-950 dark:to-slate-950 py-12 md:py-16 border-b border-slate-200 dark:border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-3xl mx-auto text-center mb-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold mb-4">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Verified Local Business & Medical Directory</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight" style="text-wrap: balance;">
+            Discover Verified Local Businesses & Healthcare
+          </h1>
+          <p class="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
+            Neighborhood directory for Dhar, Indore, and surrounding regions. Direct contact links, operating hours, photo galleries, and verified location maps.
+          </p>
+        </div>
+
+        <!-- Main Search & Filter Control Card -->
+        <div class="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 p-4 sm:p-5">
+          
+          <form onsubmit="handleSearchSubmit(event)" class="grid grid-cols-1 sm:grid-cols-12 gap-3">
+            
+            <!-- Keyword input -->
+            <div class="sm:col-span-5 relative">
+              <label for="search-input" class="sr-only">Search business or specialty</label>
+              <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+              <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Search shop, doctor, medical, clinic, bakery..." 
+                class="w-full pl-10 pr-3 py-2.5 bg-slate-50 dark:bg-slate-800/70 text-slate-900 dark:text-white rounded-xl border border-slate-200 dark:border-slate-700 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm placeholder-slate-400"
+                oninput="handleKeywordInput(this.value)"
+              />
+            </div>
+
+            <!-- City Selector -->
+            <div class="sm:col-span-3">
+              <label for="city-select" class="sr-only">Select City</label>
+              <select 
+                id="city-select" 
+                onchange="handleCityChange(this.value)"
+                class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800/70 text-slate-900 dark:text-white rounded-xl border border-slate-200 dark:border-slate-700 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm cursor-pointer"
+              >
+                <option value="">All Cities</option>
+              </select>
+            </div>
+
+            <!-- Category Selector -->
+            <div class="sm:col-span-4">
+              <label for="category-select" class="sr-only">Select Category</label>
+              <select 
+                id="category-select" 
+                onchange="handleCategoryChange(this.value)"
+                class="w-full py-2.5 px-3 bg-slate-50 dark:bg-slate-800/70 text-slate-900 dark:text-white rounded-xl border border-slate-200 dark:border-slate-700 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm cursor-pointer"
+              >
+                <option value="">All Categories</option>
+              </select>
+            </div>
+
+            <!-- Secondary Toolbar: Active filter tags + Sort + Clear button -->
+            <div class="sm:col-span-12 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100 dark:border-slate-800/80 mt-1">
+              
+              <!-- Quick City Buttons -->
+              <div id="city-pills-container" class="flex flex-wrap items-center gap-1.5 text-xs">
+                <!-- Dynamically rendered -->
+              </div>
+
+              <!-- Sort & Reset Controls -->
+              <div class="flex items-center gap-2.5 ml-auto">
+                <label for="sort-select" class="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">Sort by:</label>
+                <select 
+                  id="sort-select" 
+                  onchange="handleSortChange(this.value)"
+                  class="py-1 px-2.5 text-xs bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-lg border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                >
+                  <option value="rating-desc">Highest Rated</option>
+                  <option value="name-asc">Name (A-Z)</option>
+                  <option value="name-desc">Name (Z-A)</option>
+                </select>
+
+                <button 
+                  type="button" 
+                  id="clear-filters-btn" 
+                  onclick="clearAllFilters()"
+                  class="hidden py-1 px-2.5 text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap"
+                >
+                  Reset Filters
+                </button>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPLORE BY CITY SECTION -->
+    <section id="cities-section" class="py-10 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Explore by City</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Filter storefronts and medical centers by your city</p>
+          </div>
+          <button 
+            type="button" 
+            onclick="handleCityChange('')" 
+            class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+          >
+            Show All Cities
+          </button>
+        </div>
+
+        <!-- Dynamic City Cards Grid (STRICT ZERO COUNTS) -->
+        <div id="city-cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ALL CATEGORIES SECTION -->
+    <section id="categories-section" class="py-12 border-b border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-950">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Browse Categories</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Find trusted services, clinics, and local stores</p>
+          </div>
+          <button 
+            type="button" 
+            id="reset-cat-btn"
+            onclick="clearCategoryFilter()" 
+            class="hidden text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+          >
+            Clear Category Filter
+          </button>
+        </div>
+
+        <!-- Dynamic Category Cards Grid (STRICT ZERO COUNTS) -->
+        <div id="category-cards-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+          <!-- Populated dynamically via JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LISTINGS DIRECTORY SECTION -->
+    <section id="listings-section" class="py-12 flex-1">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Active Filter Indicator & View Controls -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <div class="text-xs font-medium text-slate-500 dark:text-slate-400">Current Directory View</div>
+            <h3 id="current-filter-label" class="text-lg font-bold text-slate-900 dark:text-white mt-0.5">
+              All Locations &amp; Categories
+            </h3>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <!-- Open Now Filter Toggle -->
+            <label class="inline-flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-emerald-500 transition-colors">
+              <input 
+                type="checkbox" 
+                id="open-now-checkbox" 
+                onchange="handleOpenNowToggle(this.checked)"
+                class="w-3.5 h-3.5 text-emerald-600 rounded focus:ring-emerald-500 cursor-pointer"
+              />
+              <span>Open Now</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Listings Grid (Rendered dynamically) -->
+        <div id="listings-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-16 px-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 my-4">
+          <div class="w-14 h-14 mx-auto mb-3 text-slate-400 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h4 class="text-base font-bold text-slate-900 dark:text-white">No businesses matched your search</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+            Try adjusting your search keywords, clearing selected city or category filters.
+          </p>
+          <button 
+            onclick="clearAllFilters()" 
+            class="mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold transition-colors"
+          >
+            Reset All Filters
+          </button>
+        </div>
+
+        <!-- Pagination Navigation (Strictly NO shop counts) -->
+        <div id="pagination-controls" class="mt-10 pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <button 
+            id="prev-page-btn" 
+            onclick="changePage(-1)" 
+            class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            Previous Page
+          </button>
+
+          <div id="page-numbers-container" class="flex items-center gap-1 text-sm">
+            <!-- Rendered dynamically (Page numbers: 1, 2, 3...) -->
+          </div>
+
+          <button 
+            id="next-page-btn" 
+            onclick="changePage(1)" 
+            class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-white dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            Next Page
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= DEDICATED FULL-PAGE SHOP VIEW ================= -->
+  <main id="shop-full-page-view" class="hidden flex-1 flex flex-col bg-slate-50 dark:bg-slate-950 transition-colors pb-16">
+    <div id="shop-full-page-content" class="w-full">
+      <!-- Dynamically injected with full-page shop profile & suggested shops underneath -->
+    </div>
+  </main>
+
+  <!-- ================= IMAGE LIGHTBOX MODAL ================= -->
+  <div id="image-lightbox-modal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md p-4 flex items-center justify-center">
+    <button onclick="closeImageLightbox()" class="absolute top-5 right-5 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white flex items-center justify-center transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <div class="max-w-4xl max-h-[85vh] overflow-hidden rounded-2xl">
+      <img id="lightbox-img" src="" alt="Full preview" class="w-full h-full object-contain" />
+    </div>
+  </div>
+
+  <!-- ================= TOAST NOTIFICATION ================= -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 max-w-sm bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-xl shadow-xl border border-slate-800 dark:border-slate-200 flex items-center gap-3 text-xs">
+    <span id="toast-message">Notification</span>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="md:col-span-2 space-y-3">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">L</div>
+            <span class="text-base font-bold text-slate-900 dark:text-white">LocalZone</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 max-w-md leading-relaxed">
+            A comprehensive community directory service for Dhar, Indore, and surrounding regions. Direct telephone dialing, WhatsApp messaging, map navigation, and verified storefront listings.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-white mb-3">Quick Navigation</h4>
+          <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400">
+            <li><a href="#cities-section" onclick="navigateToSection('cities-section')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Explore by City</a></li>
+            <li><a href="#categories-section" onclick="navigateToSection('categories-section')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Browse Categories</a></li>
+            <li><a href="#listings-section" onclick="navigateToSection('listings-section')" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Business Directory</a></li>
+            <li><button onclick="toggleFavoritesFilter()" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Saved Favorites</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-900 dark:text-white mb-3">Verified Listings</h4>
+          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            All records correspond to real storefronts, certified medical clinics, and established local services. Direct merchant contact without middlemen.
+          </p>
+          <div class="mt-4">
+            <button onclick="refreshDirectory(true)" class="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 hover:underline font-medium">
+              Refresh Directory &rarr;
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-100 dark:border-slate-800/80 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-500">
+        <p>&copy; LocalZone. All rights reserved.</p>
+        <p>Verified Local Merchant Network.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
+  <script>
+    /**
+     * Vyapaar Local Business Directory - Vanilla JS Application
+     * Strict Rule Followed: NEVER DISPLAY SHOP COUNTS ANYWHERE IN THE UI.
+     * Full Page Shop View with Underneath Suggested Shops.
+     * Clean Presentation with Zero Spreadsheet / Excel Mentions.
+     */
+
+    // --- State Management ---
+    const STATE = {
+      allRecords: [],
+      filteredRecords: [],
+      cities: [],
+      categories: [],
+      
+      // Filters
+      keyword: '',
+      selectedCity: '',
+      selectedCategory: '',
+      onlyOpenNow: false,
+      onlyFavorites: false,
+      sortBy: 'rating-desc',
+
+      // Pagination
+      currentPage: 1,
+      itemsPerPage: 12,
+
+      // Sync settings (silent background updater)
+      isSyncing: false,
+      syncTimerId: null,
+
+      // Saved Favorites (IDs)
+      favorites: JSON.parse(localStorage.getItem('vyapaar_favs') || '[]'),
+
+      // Currently active shop in full-page view
+      activeBusiness: null
+    };
+
+    // --- Category Icons Map (SVG) ---
+    const CATEGORY_ICONS = {
+      'Dental Clinic': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 2C8.5 2 6 4.5 6 7.5c0 2.2.8 4 2 5.5 1.5 2 1.5 5 1.5 7h5c0-2 0-5 1.5-7 1.2-1.5 2-3.3 2-5.5C18 4.5 15.5 2 12 2z"/></svg>`,
+      'Beauty Salon': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.828 2.828a4 4 0 11-5.656-5.656L6.343 6.343a4 4 0 015.657 5.657z"/></svg>`,
+      'Hospital': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
+      'Hospital & Clinic': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`,
+      'Bakery & Cake Shop': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 15.5a4.5 4.5 0 01-9 0 4.5 4.5 0 01-9 0c0-2.5 4.5-8.5 4.5-8.5s4.5 6 4.5 8.5zm-4.5 0c0 1.5 1 2.5 2 2.5s2-1 2-2.5"/></svg>`,
+      'Restaurant': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`,
+      'Hotel': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>`,
+      'Medical Store & Pharmacy': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>`,
+      'Gift Shop': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V6a2 2 0 10-2 2h2zm0 13l-4-4m4 4l4-4M3 12h18"/></svg>`,
+      'Mobile Shop': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
+      'Mobile Shops': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>`,
+      'Bike Showroom': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+      'Car Showroom': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 17l4-4 4 4m0 0l-4-4-4 4M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>`,
+      'Cloth Showroom': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>`,
+      'Electronic Shop': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
+      'Kirana & Grocery Store': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
+      'DEFAULT': `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`
+    };
+
+    function getCategoryIcon(catName) {
+      return CATEGORY_ICONS[catName] || CATEGORY_ICONS['DEFAULT'];
+    }
+
+    // --- RFC 4180 Robust CSV Parser ---
+    function parseCSV(text) {
+      const rows = [];
+      let currentRow = [];
+      let currentField = '';
+      let insideQuotes = false;
+      let i = 0;
+
+      while (i < text.length) {
+        const char = text[i];
+        const nextChar = text[i + 1];
+
+        if (char === '"') {
+          if (insideQuotes && nextChar === '"') {
+            currentField += '"';
+            i += 2;
+            continue;
+          } else {
+            insideQuotes = !insideQuotes;
+            i++;
+            continue;
+          }
+        }
+
+        if (char === ',' && !insideQuotes) {
+          currentRow.push(currentField.trim());
+          currentField = '';
+          i++;
+          continue;
+        }
+
+        if ((char === '\r' || char === '\n') && !insideQuotes) {
+          if (char === '\r' && nextChar === '\n') {
+            i++;
+          }
+          currentRow.push(currentField.trim());
+          if (currentRow.some(col => col.length > 0)) {
+            rows.push(currentRow);
+          }
+          currentRow = [];
+          currentField = '';
+          i++;
+          continue;
+        }
+
+        currentField += char;
+        i++;
+      }
+
+      if (currentField.length > 0 || currentRow.length > 0) {
+        currentRow.push(currentField.trim());
+        if (currentRow.some(col => col.length > 0)) {
+          rows.push(currentRow);
+        }
+      }
+
+      if (rows.length === 0) return [];
+
+      const headers = rows[0].map(h => h.trim());
+      const records = [];
+
+      for (let r = 1; r < rows.length; r++) {
+        const row = rows[r];
+        if (row.length < 2) continue;
+        const obj = {};
+        headers.forEach((header, index) => {
+          obj[header] = row[index] !== undefined ? row[index] : '';
+        });
+
+        // Generate stable ID/Slug
+        const city = obj['City'] || 'Local';
+        const name = obj['Business Name'] || 'Business';
+        obj.id = (city + '-' + name).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        
+        // Parse Gallery Images into array
+        const galleryStr = obj['Gallery Image URLs'] || '';
+        obj.galleryList = galleryStr
+          .split(/,\s*(?=http)/)
+          .map(u => u.trim().replace(/^"/, '').replace(/"$/, ''))
+          .filter(u => u.startsWith('http'));
+
+        // Normalize numeric rating
+        const rawRating = parseFloat(obj['Rating'] || '0');
+        obj.numericRating = isNaN(rawRating) ? 0 : rawRating;
+
+        records.push(obj);
+      }
+
+      return records;
+    }
+
+    // --- Opening Hours Analyzer ---
+    function checkIsOpenNow(openingHoursStr) {
+      if (!openingHoursStr) return { status: 'Open Regular Hours', color: 'slate' };
+      const lower = openingHoursStr.toLowerCase().trim();
+      if (lower.includes('24 hour') || lower.includes('24x7') || lower.includes('open 24')) {
+        return { status: 'Open 24 Hours', color: 'emerald' };
+      }
+      
+      try {
+        const now = new Date();
+        const currentMins = now.getHours() * 60 + now.getMinutes();
+
+        const timeMatch = openingHoursStr.match(/(\d{1,2}):?(\d{2})?\s*(AM|PM)\s*[-–—to]+\s*(\d{1,2}):?(\d{2})?\s*(AM|PM)/i);
+        if (timeMatch) {
+          let openH = parseInt(timeMatch[1], 10);
+          const openM = parseInt(timeMatch[2] || '0', 10);
+          const openPeriod = timeMatch[3].toUpperCase();
+          if (openPeriod === 'PM' && openH < 12) openH += 12;
+          if (openPeriod === 'AM' && openH === 12) openH = 0;
+          const openTimeMins = openH * 60 + openM;
+
+          let closeH = parseInt(timeMatch[4], 10);
+          const closeM = parseInt(timeMatch[5] || '0', 10);
+          const closePeriod = timeMatch[6].toUpperCase();
+          if (closePeriod === 'PM' && closeH < 12) closeH += 12;
+          if (closePeriod === 'AM' && closeH === 12) closeH = 0;
+          const closeTimeMins = closeH * 60 + closeM;
+
+          if (closeTimeMins > openTimeMins) {
+            if (currentMins >= openTimeMins && currentMins <= closeTimeMins) {
+              return { status: 'Open Now', color: 'emerald' };
+            } else {
+              return { status: 'Closed', color: 'amber' };
+            }
+          } else {
+            // Closes past midnight
+            if (currentMins >= openTimeMins || currentMins <= closeTimeMins) {
+              return { status: 'Open Now', color: 'emerald' };
+            } else {
+              return { status: 'Closed', color: 'amber' };
+            }
+          }
+        }
+      } catch (e) {
+        // Fallback
+      }
+
+      return { status: 'Open Today', color: 'slate' };
+    }
+
+    // --- HTML Utility Functions ---
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function getFallbackSvg(name, category) {
+      const initials = (name || 'B').substring(0, 2).toUpperCase();
+      return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="%230f172a"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="%2310b981" font-family="system-ui, sans-serif" font-size="72" font-weight="bold">${initials}</text><text x="50%" y="65%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-family="system-ui, sans-serif" font-size="24">${encodeURIComponent(category || 'Business')}</text></svg>`;
+    }
+
+    function handleImgError(imgEl, name, category) {
+      imgEl.onerror = null;
+      imgEl.src = getFallbackSvg(name, category);
+    }
+
+    // --- Directory Data Loader (Silent & Reliable) ---
+    async function refreshDirectory(isManual = false) {
+      if (STATE.isSyncing) return;
+      STATE.isSyncing = true;
+
+      const refreshIcon = document.getElementById('refresh-spinner-icon');
+      const refreshLabel = document.getElementById('refresh-btn-text');
+
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+      if (refreshLabel) refreshLabel.textContent = 'Updating...';
+
+      try {
+        const response = await fetch('/data.csv?_t=' + Date.now());
+        if (!response.ok) {
+          throw new Error(`HTTP Error ${response.status}`);
+        }
+        const csvText = await response.text();
+        const records = parseCSV(csvText);
+
+        if (!records || records.length === 0) {
+          throw new Error('No valid records retrieved');
+        }
+
+        STATE.allRecords = records;
+
+        // Dynamic Unique Cities & Categories
+        const citySet = new Set();
+        const categorySet = new Set();
+
+        STATE.allRecords.forEach(item => {
+          if (item['City'] && item['City'].trim()) citySet.add(item['City'].trim());
+          if (item['Category'] && item['Category'].trim()) categorySet.add(item['Category'].trim());
+        });
+
+        STATE.cities = Array.from(citySet).sort();
+        STATE.categories = Array.from(categorySet).sort();
+
+        // Update UI selectors & explorer sections
+        populateCitySelect();
+        populateCategorySelect();
+        renderCityCards();
+        renderCategoryCards();
+        renderCityPills();
+
+        // Apply filters & render listings
+        applyFilters();
+
+        // If a shop full page is currently open, refresh it with updated record
+        if (STATE.activeBusiness) {
+          const updatedActive = STATE.allRecords.find(r => r.id === STATE.activeBusiness.id);
+          if (updatedActive) {
+            renderShopFullPageView(updatedActive);
+          }
+        }
+
+        if (isManual) {
+          showToast('Directory listings updated!');
+        }
+
+      } catch (err) {
+        console.error('Directory refresh error:', err);
+        if (isManual) {
+          showToast('Directory up to date.');
+        }
+      } finally {
+        STATE.isSyncing = false;
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+        if (refreshLabel) refreshLabel.textContent = 'Refresh';
+      }
+    }
+
+    function startAutoSyncTimer() {
+      if (STATE.syncTimerId) clearInterval(STATE.syncTimerId);
+      // Quiet background refresh every 60 seconds
+      STATE.syncTimerId = setInterval(() => {
+        refreshDirectory(false);
+      }, 60000);
+    }
+
+    // --- Filtering & Sorting (STRICTLY NO COUNTS DISPLAYED) ---
+    function applyFilters() {
+      let results = [...STATE.allRecords];
+
+      // 1. Keyword search
+      if (STATE.keyword.trim()) {
+        const q = STATE.keyword.toLowerCase().trim();
+        results = results.filter(item => {
+          const name = (item['Business Name'] || '').toLowerCase();
+          const category = (item['Category'] || '').toLowerCase();
+          const doctor = (item['Doctor / Specialty'] || '').toLowerCase();
+          const address = (item['Address'] || '').toLowerCase();
+          const services = (item['Services'] || '').toLowerCase();
+          return name.includes(q) || category.includes(q) || doctor.includes(q) || address.includes(q) || services.includes(q);
+        });
+      }
+
+      // 2. City filter
+      if (STATE.selectedCity) {
+        results = results.filter(item => item['City'] === STATE.selectedCity);
+      }
+
+      // 3. Category filter
+      if (STATE.selectedCategory) {
+        results = results.filter(item => item['Category'] === STATE.selectedCategory);
+      }
+
+      // 4. Open Now filter
+      if (STATE.onlyOpenNow) {
+        results = results.filter(item => {
+          const openInfo = checkIsOpenNow(item['Opening Hours']);
+          return openInfo.status === 'Open Now' || openInfo.status === 'Open 24 Hours';
+        });
+      }
+
+      // 5. Favorites filter
+      if (STATE.onlyFavorites) {
+        results = results.filter(item => STATE.favorites.includes(item.id));
+      }
+
+      // 6. Sorting
+      results.sort((a, b) => {
+        if (STATE.sortBy === 'rating-desc') {
+          return (b.numericRating || 0) - (a.numericRating || 0);
+        } else if (STATE.sortBy === 'name-asc') {
+          return (a['Business Name'] || '').localeCompare(b['Business Name'] || '');
+        } else if (STATE.sortBy === 'name-desc') {
+          return (b['Business Name'] || '').localeCompare(a['Business Name'] || '');
+        }
+        return 0;
+      });
+
+      STATE.filteredRecords = results;
+      STATE.currentPage = 1;
+
+      updateFilterBreadcrumbs();
+      renderListings();
+      renderPagination();
+    }
+
+    function updateFilterBreadcrumbs() {
+      const labelEl = document.getElementById('current-filter-label');
+      const clearBtn = document.getElementById('clear-filters-btn');
+      const resetCatBtn = document.getElementById('reset-cat-btn');
+
+      const parts = [];
+      if (STATE.selectedCity) parts.push(`City: ${STATE.selectedCity}`);
+      if (STATE.selectedCategory) parts.push(`Category: ${STATE.selectedCategory}`);
+      if (STATE.keyword) parts.push(`Search: "${STATE.keyword}"`);
+      if (STATE.onlyOpenNow) parts.push('Open Now Only');
+      if (STATE.onlyFavorites) parts.push('Favorites Only');
+
+      const hasActive = parts.length > 0;
+      if (labelEl) {
+        labelEl.textContent = hasActive ? parts.join(' · ') : 'All Locations & Categories';
+      }
+
+      if (clearBtn) clearBtn.classList.toggle('hidden', !hasActive);
+      if (resetCatBtn) resetCatBtn.classList.toggle('hidden', !STATE.selectedCategory);
+    }
+
+    // --- Render Functions (STRICT ZERO-COUNT DISCIPLINE) ---
+    function renderListings() {
+      const grid = document.getElementById('listings-grid');
+      const emptyState = document.getElementById('empty-state');
+      const pagination = document.getElementById('pagination-controls');
+
+      if (!grid) return;
+
+      if (STATE.filteredRecords.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        pagination.classList.add('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      pagination.classList.remove('hidden');
+
+      const startIndex = (STATE.currentPage - 1) * STATE.itemsPerPage;
+      const endIndex = startIndex + STATE.itemsPerPage;
+      const pageItems = STATE.filteredRecords.slice(startIndex, endIndex);
+
+      let html = '';
+      pageItems.forEach(shop => {
+        const isFav = STATE.favorites.includes(shop.id);
+        const openInfo = checkIsOpenNow(shop['Opening Hours']);
+        const coverImg = shop['Cover Image URL'] || getFallbackSvg(shop['Business Name'], shop['Category']);
+        const rating = shop.numericRating ? shop.numericRating.toFixed(1) : '4.5';
+        const rawPhone = shop['Phone Number'] || '';
+        const hasPhone = rawPhone && !rawPhone.toLowerCase().includes('available locally');
+        const cleanPhone = rawPhone.replace(/[^0-9+]/g, '');
+
+        html += `
+          <article class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col overflow-hidden">
+            
+            <!-- Card Image Viewport (Clickable to open Full Page) -->
+            <div 
+              onclick="openShopFullPage('${escapeHtml(shop.id)}')" 
+              class="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-slate-800 cursor-pointer"
+            >
+              <img 
+                src="${escapeHtml(coverImg)}" 
+                alt="${escapeHtml(shop['Business Name'])}" 
+                loading="lazy"
+                referrerpolicy="no-referrer"
+                onerror="handleImgError(this, '${escapeHtml(shop['Business Name'])}', '${escapeHtml(shop['Category'])}')"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+
+              <!-- Gradient Scrim for contrast -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/20 pointer-events-none"></div>
+
+              <!-- Top Image Badges -->
+              <div class="absolute top-3 left-3 right-3 flex items-center justify-between gap-2">
+                <span class="px-2.5 py-1 text-xs font-semibold bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-slate-100 backdrop-blur-md rounded-lg shadow-sm">
+                  ${escapeHtml(shop['City'])}
+                </span>
+
+                <button 
+                  onclick="toggleFavorite('${escapeHtml(shop.id)}', event)" 
+                  class="w-8 h-8 rounded-full bg-white/90 dark:bg-slate-900/90 backdrop-blur-md flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-rose-500 dark:hover:text-rose-400 transition-colors shadow-sm focus:outline-none"
+                  aria-label="Bookmark business"
+                >
+                  <svg class="w-4 h-4 ${isFav ? 'text-rose-500 fill-rose-500' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                </button>
+              </div>
+
+              <!-- Bottom Image Metadata -->
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-medium">
+                <span class="inline-flex items-center gap-1 bg-black/50 backdrop-blur-md px-2 py-0.5 rounded-md font-bold">
+                  <svg class="w-3.5 h-3.5 text-amber-400 fill-amber-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  <span>${rating}</span>
+                </span>
+
+                <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-[11px] font-semibold ${openInfo.color === 'emerald' ? 'bg-emerald-600/90 text-white' : 'bg-slate-800/80 text-slate-200'} backdrop-blur-md">
+                  <span class="w-1.5 h-1.5 rounded-full ${openInfo.color === 'emerald' ? 'bg-white' : 'bg-amber-400'}"></span>
+                  <span>${openInfo.status}</span>
+                </span>
+              </div>
+
+            </div>
+
+            <!-- Card Content Body -->
+            <div class="p-5 flex-1 flex flex-col justify-between">
+              
+              <div>
+                <!-- Category and Specialty Line -->
+                <div class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold mb-1 line-clamp-1">
+                  ${escapeHtml(shop['Category'])}
+                  ${shop['Doctor / Specialty'] ? `<span class="text-slate-400 dark:text-slate-600 font-normal"> · </span><span class="font-normal text-slate-600 dark:text-slate-300">${escapeHtml(shop['Doctor / Specialty'])}</span>` : ''}
+                </div>
+
+                <!-- Business Title (Clickable to open Full Page) -->
+                <h3 
+                  onclick="openShopFullPage('${escapeHtml(shop.id)}')" 
+                  class="text-base font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors cursor-pointer"
+                >
+                  ${escapeHtml(shop['Business Name'])}
+                </h3>
+
+                <!-- Address -->
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-2 leading-relaxed flex items-start gap-1.5">
+                  <svg class="w-3.5 h-3.5 shrink-0 mt-0.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>${escapeHtml(shop['Address'] || 'Address available upon request')}</span>
+                </p>
+
+                <!-- Opening Hours snippet -->
+                ${shop['Opening Hours'] ? `
+                  <div class="mt-2 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                    <svg class="w-3 h-3 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span class="truncate">${escapeHtml(shop['Opening Hours'])}</span>
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Quick Action Toolbar -->
+              <div class="mt-5 pt-3.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
+                
+                <div class="flex items-center gap-1.5">
+                  ${hasPhone ? `
+                    <a 
+                      href="tel:${cleanPhone}" 
+                      title="Call ${escapeHtml(shop['Business Name'])}"
+                      class="p-2 rounded-lg bg-slate-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950 text-slate-700 hover:text-emerald-700 dark:text-slate-300 dark:hover:text-emerald-300 transition-colors"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    </a>
+                    <a 
+                      href="https://wa.me/${cleanPhone}?text=${encodeURIComponent('Hello, I found your business on LocalZone.')}" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      title="WhatsApp Chat"
+                      class="p-2 rounded-lg bg-slate-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950 text-slate-700 hover:text-emerald-700 dark:text-slate-300 dark:hover:text-emerald-300 transition-colors"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.288.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+                    </a>
+                  ` : ''}
+
+                  ${shop['Map Embed URL'] ? `
+                    <a 
+                      href="${escapeHtml(shop['Map Embed URL'].replace('&output=embed', ''))}" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      title="Google Maps"
+                      class="p-2 rounded-lg bg-slate-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950 text-slate-700 hover:text-emerald-700 dark:text-slate-300 dark:hover:text-emerald-300 transition-colors"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                  ` : ''}
+                </div>
+
+                <!-- Full Page Open Button -->
+                <button 
+                  onclick="openShopFullPage('${escapeHtml(shop.id)}')" 
+                  class="px-3.5 py-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/60 rounded-lg transition-colors flex items-center gap-1 focus:outline-none"
+                >
+                  <span>Open Full Page</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+
+              </div>
+
+            </div>
+
+          </article>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    function renderPagination() {
+      const container = document.getElementById('page-numbers-container');
+      const prevBtn = document.getElementById('prev-page-btn');
+      const nextBtn = document.getElementById('next-page-btn');
+      const pagination = document.getElementById('pagination-controls');
+
+      if (!container) return;
+
+      const totalPages = Math.ceil(STATE.filteredRecords.length / STATE.itemsPerPage);
+
+      if (totalPages <= 1) {
+        pagination.classList.add('hidden');
+        return;
+      }
+
+      pagination.classList.remove('hidden');
+      prevBtn.disabled = STATE.currentPage === 1;
+      nextBtn.disabled = STATE.currentPage === totalPages;
+
+      let html = '';
+      for (let p = 1; p <= totalPages; p++) {
+        if (p === 1 || p === totalPages || (p >= STATE.currentPage - 1 && p <= STATE.currentPage + 1)) {
+          const isActive = p === STATE.currentPage;
+          html += `
+            <button 
+              onclick="goToPage(${p})" 
+              class="w-8 h-8 rounded-lg font-medium text-xs transition-colors ${isActive ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'}"
+            >
+              ${p}
+            </button>
+          `;
+        } else if (p === STATE.currentPage - 2 || p === STATE.currentPage + 2) {
+          html += `<span class="px-1 text-slate-400">...</span>`;
+        }
+      }
+
+      container.innerHTML = html;
+    }
+
+    function goToPage(page) {
+      STATE.currentPage = page;
+      renderListings();
+      renderPagination();
+      const listingsEl = document.getElementById('listings-section');
+      if (listingsEl) listingsEl.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function changePage(delta) {
+      const totalPages = Math.ceil(STATE.filteredRecords.length / STATE.itemsPerPage);
+      const newPage = STATE.currentPage + delta;
+      if (newPage >= 1 && newPage <= totalPages) {
+        goToPage(newPage);
+      }
+    }
+
+    // --- Dynamic Cities & Categories UI (STRICTLY NO COUNTS) ---
+    function populateCitySelect() {
+      const sel = document.getElementById('city-select');
+      if (!sel) return;
+      const currentVal = STATE.selectedCity;
+      sel.innerHTML = '<option value="">All Cities</option>' + 
+        STATE.cities.map(c => `<option value="${escapeHtml(c)}" ${c === currentVal ? 'selected' : ''}>${escapeHtml(c)}</option>`).join('');
+    }
+
+    function populateCategorySelect() {
+      const sel = document.getElementById('category-select');
+      if (!sel) return;
+      const currentVal = STATE.selectedCategory;
+      sel.innerHTML = '<option value="">All Categories</option>' + 
+        STATE.categories.map(c => `<option value="${escapeHtml(c)}" ${c === currentVal ? 'selected' : ''}>${escapeHtml(c)}</option>`).join('');
+    }
+
+    function renderCityPills() {
+      const container = document.getElementById('city-pills-container');
+      if (!container) return;
+
+      let html = `
+        <button 
+          type="button" 
+          onclick="handleCityChange('')" 
+          class="px-2.5 py-1 rounded-md transition-colors ${STATE.selectedCity === '' ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-semibold' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}"
+        >
+          All Regions
+        </button>
+      `;
+
+      STATE.cities.forEach(city => {
+        const isSelected = STATE.selectedCity === city;
+        html += `
+          <button 
+            type="button" 
+            onclick="handleCityChange('${escapeHtml(city)}')" 
+            class="px-2.5 py-1 rounded-md transition-colors ${isSelected ? 'bg-emerald-600 text-white font-semibold' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}"
+          >
+            ${escapeHtml(city)}
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderCityCards() {
+      const grid = document.getElementById('city-cards-grid');
+      if (!grid) return;
+
+      const cityDescriptions = {
+        'Dhar': 'Historic city center known for medical specialties, markets, educational hubs, and local craftsmanship.',
+        'Indore': 'Commercial and healthcare capital featuring prominent medical corridors, retail complexes, and modern services.'
+      };
+
+      let html = '';
+      STATE.cities.forEach(city => {
+        const isSelected = STATE.selectedCity === city;
+        const desc = cityDescriptions[city] || `Discover registered local businesses and emergency services in ${city}.`;
+
+        html += `
+          <div 
+            onclick="selectCityAndScroll('${escapeHtml(city)}')" 
+            class="group p-5 rounded-2xl border transition-all cursor-pointer ${isSelected ? 'border-emerald-500 bg-emerald-50/40 dark:bg-emerald-950/20' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-sm'}"
+          >
+            <div class="flex items-center justify-between">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 flex items-center justify-center font-bold text-sm">
+                ${escapeHtml(city.substring(0, 2).toUpperCase())}
+              </div>
+              <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
+                <span>Explore</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+            </div>
+
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              ${escapeHtml(city)}
+            </h3>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+              ${desc}
+            </p>
+          </div>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    function renderCategoryCards() {
+      const grid = document.getElementById('category-cards-grid');
+      if (!grid) return;
+
+      let html = '';
+      STATE.categories.forEach(cat => {
+        const isSelected = STATE.selectedCategory === cat;
+        const iconSvg = getCategoryIcon(cat);
+
+        html += `
+          <button 
+            type="button" 
+            onclick="selectCategoryAndScroll('${escapeHtml(cat)}')" 
+            class="p-4 rounded-xl border text-left flex flex-col justify-between transition-all ${isSelected ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-100' : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-emerald-400 text-slate-700 dark:text-slate-300 hover:shadow-sm'}"
+          >
+            <div class="text-emerald-600 dark:text-emerald-400 mb-2.5">
+              ${iconSvg}
+            </div>
+            <div>
+              <span class="text-xs font-semibold block leading-tight line-clamp-2">
+                ${escapeHtml(cat)}
+              </span>
+            </div>
+          </button>
+        `;
+      });
+
+      grid.innerHTML = html;
+    }
+
+    // --- Action Handlers ---
+    function handleSearchSubmit(e) {
+      if (e) e.preventDefault();
+      backToDirectoryHome();
+      applyFilters();
+      const el = document.getElementById('listings-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleKeywordInput(val) {
+      STATE.keyword = val;
+      applyFilters();
+    }
+
+    function handleCityChange(cityVal) {
+      STATE.selectedCity = cityVal;
+      const citySelect = document.getElementById('city-select');
+      if (citySelect) citySelect.value = cityVal;
+      renderCityPills();
+      renderCityCards();
+      applyFilters();
+    }
+
+    function selectCityAndScroll(cityVal) {
+      backToDirectoryHome();
+      handleCityChange(cityVal);
+      const el = document.getElementById('listings-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleCategoryChange(catVal) {
+      STATE.selectedCategory = catVal;
+      const catSelect = document.getElementById('category-select');
+      if (catSelect) catSelect.value = catVal;
+      renderCategoryCards();
+      applyFilters();
+    }
+
+    function selectCategoryAndScroll(catVal) {
+      backToDirectoryHome();
+      handleCategoryChange(catVal);
+      const el = document.getElementById('listings-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function clearCategoryFilter() {
+      handleCategoryChange('');
+    }
+
+    function handleSortChange(sortVal) {
+      STATE.sortBy = sortVal;
+      applyFilters();
+    }
+
+    function handleOpenNowToggle(checked) {
+      STATE.onlyOpenNow = checked;
+      applyFilters();
+    }
+
+    function toggleFavoritesFilter() {
+      backToDirectoryHome();
+      STATE.onlyFavorites = !STATE.onlyFavorites;
+      const btn = document.getElementById('favorites-toggle-btn');
+      if (btn) {
+        if (STATE.onlyFavorites) {
+          btn.classList.add('bg-rose-50', 'text-rose-600', 'dark:bg-rose-950/60');
+          showToast('Filtering by saved favorites');
+        } else {
+          btn.classList.remove('bg-rose-50', 'text-rose-600', 'dark:bg-rose-950/60');
+        }
+      }
+      applyFilters();
+      const el = document.getElementById('listings-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function clearAllFilters() {
+      STATE.keyword = '';
+      STATE.selectedCity = '';
+      STATE.selectedCategory = '';
+      STATE.onlyOpenNow = false;
+      STATE.onlyFavorites = false;
+      STATE.sortBy = 'rating-desc';
+
+      const sInput = document.getElementById('search-input');
+      const cSelect = document.getElementById('city-select');
+      const catSelect = document.getElementById('category-select');
+      const sortSelect = document.getElementById('sort-select');
+      const openCheck = document.getElementById('open-now-checkbox');
+      const favBtn = document.getElementById('favorites-toggle-btn');
+
+      if (sInput) sInput.value = '';
+      if (cSelect) cSelect.value = '';
+      if (catSelect) catSelect.value = '';
+      if (sortSelect) sortSelect.value = 'rating-desc';
+      if (openCheck) openCheck.checked = false;
+      if (favBtn) favBtn.classList.remove('bg-rose-50', 'text-rose-600', 'dark:bg-rose-950/60');
+
+      renderCityPills();
+      renderCityCards();
+      renderCategoryCards();
+      applyFilters();
+      showToast('Filters reset to show all listings');
+    }
+
+    function navigateToSection(sectionId) {
+      backToDirectoryHome();
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
+
+    // --- Favorites Bookmark Management ---
+    function toggleFavorite(shopId, e) {
+      if (e) e.stopPropagation();
+      const idx = STATE.favorites.indexOf(shopId);
+      if (idx > -1) {
+        STATE.favorites.splice(idx, 1);
+        showToast('Removed from saved list');
+      } else {
+        STATE.favorites.push(shopId);
+        showToast('Saved to your favorites!');
+      }
+      localStorage.setItem('vyapaar_favs', JSON.stringify(STATE.favorites));
+      renderListings();
+      if (STATE.activeBusiness && STATE.activeBusiness.id === shopId) {
+        updateFullPageFavButton();
+      }
+    }
+
+    // ================= DEDICATED FULL-PAGE SHOP SYSTEM =================
+    /**
+     * Requirement: "SHOP KO OPEN KARNE KE BAD SHOP FULL PAGE ME SHOW KARNA CHAHIYE
+     * USKE NICHE SUGESTION ME SHOP DIKHANA CHAHIYE ISE FIX KARO"
+     */
+    function openShopFullPage(shopId) {
+      const shop = STATE.allRecords.find(item => item.id === shopId);
+      if (!shop) return;
+
+      STATE.activeBusiness = shop;
+
+      // Update URL hash for clean deep linking & history navigation
+      window.location.hash = 'shop-' + encodeURIComponent(shop.id);
+
+      // Hide Directory Home View & Show Full Page View
+      const homeView = document.getElementById('directory-home-view');
+      const fullPageView = document.getElementById('shop-full-page-view');
+
+      if (homeView) homeView.classList.add('hidden');
+      if (fullPageView) fullPageView.classList.remove('hidden');
+
+      renderShopFullPageView(shop);
+
+      // Scroll immediately to top for pristine full page feel
+      window.scrollTo({ top: 0, behavior: 'instant' });
+
+      // Update document title
+      document.title = `${shop['Business Name']} - LocalZone`;
+    }
+
+    function backToDirectoryHome(e) {
+      if (e) e.preventDefault();
+      
+      const homeView = document.getElementById('directory-home-view');
+      const fullPageView = document.getElementById('shop-full-page-view');
+
+      if (fullPageView) fullPageView.classList.add('hidden');
+      if (homeView) homeView.classList.remove('hidden');
+
+      STATE.activeBusiness = null;
+      if (window.location.hash.startsWith('#shop-')) {
+        history.pushState(null, '', window.location.pathname + window.location.search);
+      }
+
+      document.title = 'LocalZone - Local Business Directory';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderShopFullPageView(shop) {
+      const container = document.getElementById('shop-full-page-content');
+      if (!container) return;
+
+      const isFav = STATE.favorites.includes(shop.id);
+      const openInfo = checkIsOpenNow(shop['Opening Hours']);
+      const rating = shop.numericRating ? shop.numericRating.toFixed(1) : '4.5';
+      const coverImg = shop['Cover Image URL'] || getFallbackSvg(shop['Business Name'], shop['Category']);
+
+      const rawPhone = shop['Phone Number'] || '';
+      const hasPhone = rawPhone && !rawPhone.toLowerCase().includes('available locally');
+      const cleanPhone = rawPhone.replace(/[^0-9+]/g, '');
+
+      const websiteUrl = shop['Website URL'];
+      const hasValidWebsite = websiteUrl && !websiteUrl.toLowerCase().includes('no website') && websiteUrl.startsWith('http');
+
+      // Gallery Images
+      let galleryHtml = '';
+      if (shop.galleryList && shop.galleryList.length > 0) {
+        galleryHtml = `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+            <h3 class="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>Storefront & Facility Gallery</span>
+            </h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              ${shop.galleryList.map(url => `
+                <div class="group relative aspect-[4/3] rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-800 cursor-pointer shadow-sm">
+                  <img 
+                    src="${escapeHtml(url)}" 
+                    alt="${escapeHtml(shop['Business Name'])} facility photo" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer"
+                    onerror="handleImgError(this, '${escapeHtml(shop['Business Name'])}', '${escapeHtml(shop['Category'])}')"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    onclick="openImageLightbox('${escapeHtml(url)}')"
+                  />
+                  <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white pointer-events-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            <p class="text-[11px] text-slate-400 dark:text-slate-500 mt-2">Click any photo to view in high resolution fullscreen.</p>
+          </div>
+        `;
+      }
+
+      // Services List
+      let servicesHtml = '';
+      if (shop['Services']) {
+        const services = shop['Services'].split(',').map(s => s.trim()).filter(Boolean);
+        if (services.length > 0) {
+          servicesHtml = `
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+              <h3 class="text-base font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Key Services & Offerings</span>
+              </h3>
+              <div class="flex flex-wrap gap-2.5">
+                ${services.map(s => `
+                  <span class="px-3.5 py-1.5 bg-emerald-50/70 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-200 text-xs font-semibold rounded-xl border border-emerald-200/80 dark:border-emerald-800/80 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    <span>${escapeHtml(s)}</span>
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      // Google Maps Embed
+      let mapEmbedHtml = '';
+      if (shop['Map Embed URL']) {
+        mapEmbedHtml = `
+          <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <svg class="w-5 h-5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>Store Location & Directions</span>
+              </h3>
+              <a 
+                href="${escapeHtml(shop['Map Embed URL'].replace('&output=embed', ''))}" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1"
+              >
+                <span>Open in Google Maps</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+            </div>
+            <div class="w-full aspect-[16/9] sm:aspect-[21/9] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 shadow-inner">
+              <iframe 
+                src="${escapeHtml(shop['Map Embed URL'])}" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Location map for ${escapeHtml(shop['Business Name'])}"
+              ></iframe>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-3 flex items-start gap-1.5">
+              <svg class="w-4 h-4 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span>${escapeHtml(shop['Address'] || 'Address provided locally')}</span>
+            </p>
+          </div>
+        `;
+      }
+
+      // ================= SUGGESTIONS UNDERNEATH SHOP (MANDATORY REQUIREMENT) =================
+      // STRICT ZERO COUNT DISCIPLINE
+      const sameCategorySuggestions = STATE.allRecords
+        .filter(item => item.id !== shop.id && item['Category'] === shop['Category'])
+        .slice(0, 4);
+
+      const sameCitySuggestions = STATE.allRecords
+        .filter(item => item.id !== shop.id && item['City'] === shop['City'] && item['Category'] !== shop['Category'])
+        .slice(0, 4);
+
+      let suggestionsHtml = `
+        <section class="mt-14 pt-10 border-t border-slate-200 dark:border-slate-800">
+          <div class="mb-8">
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs font-semibold mb-2">
+              <span>Handpicked Recommendations</span>
+            </div>
+            <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white">Suggested Shops &amp; Nearby Businesses</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Discover other verified storefronts and healthcare clinics you might be interested in</p>
+          </div>
+
+          <div class="space-y-10">
+            ${sameCategorySuggestions.length > 0 ? `
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>More ${escapeHtml(shop['Category'])} Providers</span>
+                  </h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  ${sameCategorySuggestions.map(rel => renderSuggestionCard(rel)).join('')}
+                </div>
+              </div>
+            ` : ''}
+
+            ${sameCitySuggestions.length > 0 ? `
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                    <span>Other Top-Rated Businesses in ${escapeHtml(shop['City'])}</span>
+                  </h3>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  ${sameCitySuggestions.map(rel => renderSuggestionCard(rel)).join('')}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </section>
+      `;
+
+      // Full Page Assembly
+      container.innerHTML = `
+        <!-- Sticky Sub-Bar with Back Navigation & Breadcrumbs -->
+        <div class="sticky top-16 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-3 min-w-0">
+              <button 
+                onclick="backToDirectoryHome(event)" 
+                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950/80 text-slate-800 hover:text-emerald-700 dark:text-slate-200 dark:hover:text-emerald-300 font-bold text-xs transition-colors shrink-0 shadow-sm"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                <span>Back to Directory</span>
+              </button>
+
+              <div class="hidden sm:flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 truncate">
+                <span class="hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer" onclick="backToDirectoryHome(event)">Home</span>
+                <span>/</span>
+                <span class="hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer" onclick="selectCityAndScroll('${escapeHtml(shop['City'])}')">${escapeHtml(shop['City'])}</span>
+                <span>/</span>
+                <span class="hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer" onclick="selectCategoryAndScroll('${escapeHtml(shop['Category'])}')">${escapeHtml(shop['Category'])}</span>
+                <span>/</span>
+                <span class="font-semibold text-slate-800 dark:text-slate-200 truncate">${escapeHtml(shop['Business Name'])}</span>
+              </div>
+            </div>
+
+            <!-- Share & Bookmark Buttons -->
+            <div class="flex items-center gap-2 shrink-0">
+              <button 
+                onclick="shareCurrentShop('${escapeHtml(shop['Business Name'])}')" 
+                class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                title="Share link"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                <span class="hidden sm:inline">Share</span>
+              </button>
+
+              <button 
+                onclick="toggleFavorite('${escapeHtml(shop.id)}')" 
+                id="fullpage-fav-btn"
+                class="p-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                title="Save Business"
+              >
+                <svg class="w-4 h-4 ${isFav ? 'text-rose-500 fill-rose-500' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          
+          <!-- Full Page Hero Banner -->
+          <div class="relative w-full aspect-[16/7] sm:aspect-[21/8] rounded-3xl overflow-hidden bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl">
+            <img 
+              src="${escapeHtml(coverImg)}" 
+              alt="${escapeHtml(shop['Business Name'])}" 
+              referrerpolicy="no-referrer"
+              onerror="handleImgError(this, '${escapeHtml(shop['Business Name'])}', '${escapeHtml(shop['Category'])}')"
+              class="w-full h-full object-cover"
+            />
+            
+            <!-- Dark Gradient Scrim -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
+
+            <!-- Banner Badges & Title -->
+            <div class="absolute bottom-6 left-6 right-6 text-white space-y-2">
+              <div class="flex flex-wrap items-center gap-2 text-xs font-bold">
+                <span class="px-3 py-1 bg-emerald-600 rounded-lg text-white shadow-sm flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>${escapeHtml(shop['City'])}</span>
+                </span>
+                <span class="px-3 py-1 bg-white/20 backdrop-blur-md rounded-lg text-white">
+                  ${escapeHtml(shop['Category'])}
+                </span>
+                <span class="px-2.5 py-1 bg-amber-500/90 backdrop-blur-md rounded-lg text-slate-950 font-black flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5 fill-slate-950" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                  <span>${rating} Rating</span>
+                </span>
+                <span class="px-2.5 py-1 rounded-lg text-xs font-semibold ${openInfo.color === 'emerald' ? 'bg-emerald-600/90 text-white' : 'bg-slate-800/90 text-slate-200'} backdrop-blur-md flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full ${openInfo.color === 'emerald' ? 'bg-white' : 'bg-amber-400'}"></span>
+                  <span>${openInfo.status}</span>
+                </span>
+              </div>
+
+              <h1 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white drop-shadow-sm">
+                ${escapeHtml(shop['Business Name'])}
+              </h1>
+              
+              ${shop['Doctor / Specialty'] ? `
+                <p class="text-sm sm:text-base font-medium text-emerald-300 drop-shadow-sm">
+                  ${escapeHtml(shop['Doctor / Specialty'])}
+                </p>
+              ` : ''}
+            </div>
+          </div>
+
+          <!-- Quick Action Buttons Bar -->
+          <div class="mt-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm flex flex-wrap items-center justify-between gap-4">
+            
+            <div class="flex flex-wrap items-center gap-3">
+              ${hasPhone ? `
+                <a 
+                  href="tel:${cleanPhone}" 
+                  class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl flex items-center gap-2 shadow-sm transition-all hover:scale-[1.02]"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  <span>Call ${escapeHtml(cleanPhone)}</span>
+                </a>
+
+                <a 
+                  href="https://wa.me/${cleanPhone}?text=${encodeURIComponent('Hello ' + shop['Business Name'] + ', I found your business on LocalZone.')}" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="px-5 py-2.5 bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 font-bold text-sm rounded-xl flex items-center gap-2 transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.288.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.13.332.202.043.073.043.419-.101.824z"/></svg>
+                  <span>WhatsApp Chat</span>
+                </a>
+              ` : ''}
+
+              ${shop['Map Embed URL'] ? `
+                <a 
+                  href="${escapeHtml(shop['Map Embed URL'].replace('&output=embed', ''))}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="px-4 py-2.5 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm rounded-xl flex items-center gap-2 transition-colors"
+                >
+                  <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>Get Directions</span>
+                </a>
+              ` : ''}
+
+              ${hasValidWebsite ? `
+                <a 
+                  href="${escapeHtml(websiteUrl)}" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="px-4 py-2.5 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 font-semibold text-sm rounded-xl flex items-center gap-2 transition-colors"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                  <span>Visit Website</span>
+                </a>
+              ` : ''}
+            </div>
+
+            <!-- Verified Merchant Badge -->
+            <div class="flex items-center gap-2 text-xs font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1.5 rounded-xl border border-emerald-200/80 dark:border-emerald-800/80">
+              <svg class="w-4 h-4 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+              <span>Verified Directory Member</span>
+            </div>
+
+          </div>
+
+          <!-- 2-Column Content Layout -->
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+            
+            <!-- Left Main Column (2 spans) -->
+            <div class="lg:col-span-2 space-y-8">
+              
+              <!-- Address Details Card -->
+              <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[11px]">Physical Storefront Address</h3>
+                  <p class="text-sm text-slate-700 dark:text-slate-300 mt-1 font-medium leading-relaxed">
+                    ${escapeHtml(shop['Address'] || 'Address provided locally in ' + shop['City'])}
+                  </p>
+                  <button 
+                    onclick="copyText('${escapeHtml(shop['Address'] || '')}')" 
+                    class="mt-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    <span>Copy Full Address</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Services Section -->
+              ${servicesHtml}
+
+              <!-- Gallery Section -->
+              ${galleryHtml}
+
+              <!-- Maps Section -->
+              ${mapEmbedHtml}
+
+            </div>
+
+            <!-- Right Sidebar Column (1 span) -->
+            <div class="space-y-6">
+              
+              <!-- Business Overview & Contact Summary -->
+              <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-5">
+                <h3 class="text-base font-bold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3">
+                  Business Overview
+                </h3>
+
+                <div class="space-y-4 text-xs">
+                  <div>
+                    <span class="text-slate-400 block font-medium">Category</span>
+                    <span class="text-slate-900 dark:text-white font-semibold text-sm mt-0.5 block">${escapeHtml(shop['Category'])}</span>
+                  </div>
+
+                  <div>
+                    <span class="text-slate-400 block font-medium">City / Territory</span>
+                    <span class="text-slate-900 dark:text-white font-semibold text-sm mt-0.5 block">${escapeHtml(shop['City'])}</span>
+                  </div>
+
+                  ${shop['Doctor / Specialty'] ? `
+                    <div>
+                      <span class="text-slate-400 block font-medium">Specialist / In-Charge</span>
+                      <span class="text-slate-900 dark:text-white font-semibold text-sm mt-0.5 block">${escapeHtml(shop['Doctor / Specialty'])}</span>
+                    </div>
+                  ` : ''}
+
+                  <div>
+                    <span class="text-slate-400 block font-medium">Operating Hours</span>
+                    <span class="text-slate-900 dark:text-white font-semibold text-sm mt-0.5 block">${escapeHtml(shop['Opening Hours'] || 'Regular Store Hours')}</span>
+                  </div>
+
+                  ${hasPhone ? `
+                    <div>
+                      <span class="text-slate-400 block font-medium">Telephone</span>
+                      <a href="tel:${cleanPhone}" class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm mt-0.5 block hover:underline">${escapeHtml(cleanPhone)}</a>
+                    </div>
+                  ` : ''}
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <button 
+                    onclick="toggleFavorite('${escapeHtml(shop.id)}')" 
+                    class="w-full py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                  >
+                    <svg class="w-4 h-4 ${isFav ? 'text-rose-500 fill-rose-500' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <span>${isFav ? 'Saved in Your Favorites' : 'Save to Favorites'}</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Community Guarantee Box -->
+              <div class="bg-gradient-to-br from-emerald-500/10 via-emerald-500/5 to-transparent rounded-2xl border border-emerald-200/80 dark:border-emerald-900/60 p-6 space-y-3">
+                <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">✓</div>
+                <h4 class="text-sm font-bold text-slate-900 dark:text-white">Community Verified</h4>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                  Listing details are directly verified for the Dhar and Indore metropolitan area. Call or message via WhatsApp for real-time appointment and inquiries.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Suggestions Underneath the Shop -->
+          ${suggestionsHtml}
+
+        </div>
+      `;
+    }
+
+    function renderSuggestionCard(relShop) {
+      const coverImg = relShop['Cover Image URL'] || getFallbackSvg(relShop['Business Name'], relShop['Category']);
+      const rating = relShop.numericRating ? relShop.numericRating.toFixed(1) : '4.5';
+      const openInfo = checkIsOpenNow(relShop['Opening Hours']);
+      const rawPhone = relShop['Phone Number'] || '';
+      const hasPhone = rawPhone && !rawPhone.toLowerCase().includes('available locally');
+      const cleanPhone = rawPhone.replace(/[^0-9+]/g, '');
+
+      return `
+        <div 
+          onclick="openShopFullPage('${escapeHtml(relShop.id)}')" 
+          class="group bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col overflow-hidden cursor-pointer"
+        >
+          <div class="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+            <img 
+              src="${escapeHtml(coverImg)}" 
+              alt="${escapeHtml(relShop['Business Name'])}" 
+              loading="lazy" 
+              referrerpolicy="no-referrer"
+              onerror="handleImgError(this, '${escapeHtml(relShop['Business Name'])}', '${escapeHtml(relShop['Category'])}')"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            
+            <div class="absolute top-2.5 left-2.5">
+              <span class="px-2 py-0.5 text-[10px] font-bold bg-white/90 dark:bg-slate-900/90 text-slate-800 dark:text-slate-100 rounded-md">
+                ${escapeHtml(relShop['City'])}
+              </span>
+            </div>
+
+            <div class="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between text-white text-[11px] font-semibold">
+              <span class="flex items-center gap-1 bg-black/40 px-1.5 py-0.5 rounded">
+                <svg class="w-3 h-3 text-amber-400 fill-amber-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                <span>${rating}</span>
+              </span>
+              <span class="text-[10px] ${openInfo.color === 'emerald' ? 'text-emerald-300' : 'text-amber-300'}">
+                ${openInfo.status}
+              </span>
+            </div>
+          </div>
+
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 block line-clamp-1">
+                ${escapeHtml(relShop['Category'])}
+              </span>
+              <h4 class="text-sm font-bold text-slate-900 dark:text-white mt-1 line-clamp-1 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                ${escapeHtml(relShop['Business Name'])}
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1.5 line-clamp-2">
+                ${escapeHtml(relShop['Address'] || 'Address available locally')}
+              </p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 group-hover:underline flex items-center gap-1">
+                <span>View Full Page</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </span>
+
+              ${hasPhone ? `
+                <a 
+                  href="tel:${cleanPhone}" 
+                  onclick="event.stopPropagation()"
+                  class="p-1.5 rounded-lg bg-slate-100 hover:bg-emerald-50 dark:bg-slate-800 dark:hover:bg-emerald-950 text-slate-700 dark:text-slate-300"
+                  title="Direct Call"
+                >
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                </a>
+              ` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateFullPageFavButton() {
+      const btn = document.getElementById('fullpage-fav-btn');
+      if (!btn || !STATE.activeBusiness) return;
+      const isFav = STATE.favorites.includes(STATE.activeBusiness.id);
+      btn.innerHTML = `<svg class="w-4 h-4 ${isFav ? 'text-rose-500 fill-rose-500' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`;
+    }
+
+    function openImageLightbox(url) {
+      const modal = document.getElementById('image-lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      if (modal && img) {
+        img.src = url;
+        modal.classList.remove('hidden');
+      }
+    }
+
+    function closeImageLightbox() {
+      const modal = document.getElementById('image-lightbox-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function shareCurrentShop(shopName) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(window.location.href);
+        showToast(`Copied link for ${shopName}`);
+      } else {
+        showToast('Link ready in address bar');
+      }
+    }
+
+    function copyText(str) {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(str);
+        showToast('Address copied to clipboard!');
+      }
+    }
+
+    // Lightbox click-outside handler & Escape
+    window.addEventListener('click', (e) => {
+      const lightboxModal = document.getElementById('image-lightbox-modal');
+      if (e.target === lightboxModal) closeImageLightbox();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeImageLightbox();
+      }
+    });
+
+    // Hashchange for seamless browser back/forward buttons
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#shop-')) {
+        const id = decodeURIComponent(hash.replace('#shop-', ''));
+        openShopFullPage(id);
+      } else if (!hash || hash === '#' || hash.startsWith('#listings') || hash.startsWith('#cities') || hash.startsWith('#categories')) {
+        const homeView = document.getElementById('directory-home-view');
+        const fullPageView = document.getElementById('shop-full-page-view');
+        if (fullPageView && !fullPageView.classList.contains('hidden')) {
+          fullPageView.classList.add('hidden');
+          if (homeView) homeView.classList.remove('hidden');
+          STATE.activeBusiness = null;
+          document.title = 'Vyapaar Local Business Directory';
+        }
+      }
+    });
+
+    // --- Toast Notification ---
+    let toastTimeout = null;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toast-message');
+      if (!toast || !msgEl) return;
+
+      msgEl.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+
+    // --- Theme (Light / Dark) Toggle ---
+    function initTheme() {
+      const savedTheme = localStorage.getItem('vyapaar_theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        document.documentElement.classList.add('dark');
+        document.getElementById('moon-icon').classList.remove('hidden');
+        document.getElementById('sun-icon').classList.add('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        document.getElementById('moon-icon').classList.add('hidden');
+        document.getElementById('sun-icon').classList.remove('hidden');
+      }
+    }
+
+    function toggleDarkMode() {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('vyapaar_theme', isDark ? 'dark' : 'light');
+      
+      const moon = document.getElementById('moon-icon');
+      const sun = document.getElementById('sun-icon');
+      if (moon && sun) {
+        moon.classList.toggle('hidden', !isDark);
+        sun.classList.toggle('hidden', isDark);
+      }
+    }
+
+    // --- Initialization ---
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      
+      // Load directory records
+      refreshDirectory(false).then(() => {
+        // If initial URL has #shop-[id], navigate directly to shop full page
+        const hash = window.location.hash;
+        if (hash.startsWith('#shop-')) {
+          const id = decodeURIComponent(hash.replace('#shop-', ''));
+          openShopFullPage(id);
+        }
+      });
+
+      // Background auto-refresh timer
+      startAutoSyncTimer();
+    });
+  </script>
+
+</body>
+</html>

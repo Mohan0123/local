@@ -1,0 +1,6 @@
+{
+  "name": "Vyapaar Local Business Directory",
+  "description": "Discover verified local businesses, healthcare clinics, stores, and services across Dhar and Indore with live synchronization, contact links, and interactive maps.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
